@@ -7,7 +7,7 @@
  */
 import { StrictMode, useCallback, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import "../../app/src/styles.css";
+import "./styles.css";
 import Story, { type StoryShell } from "../../app/src/sections/Story";
 
 const KEY = "pbl:story_progress";

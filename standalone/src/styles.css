@@ -1,0 +1,7 @@
+/* The standalone build keeps the app's design tokens and base rules, but
+   Tailwind v4 only scans from the Vite root — which here is standalone/. The
+   story components live one level up in app/src, so their utilities were
+   never generated and the page rendered unstyled. @source tells Tailwind to
+   scan that tree as well. */
+@import "../../app/src/styles.css";
+@source "../../app/src";
