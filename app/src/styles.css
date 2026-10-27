@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/inter";
+
+@theme {
+  /* Elevated-inherit palette, sampled from clt.vtc.edu.hk/pbl */
+  --color-cream: #f6f1e5;        /* page background */
+  --color-cream-deep: #ece3cd;   /* alternating panels */
+  --color-ink: #23242b;          /* primary text */
+  --color-ink-soft: #5b5b64;     /* secondary text */
+  --color-teal: #23908b;         /* primary brand */
+  --color-teal-deep: #166b67;
+  --color-plum: #5d2a3c;         /* headings, emphasis */
+  --color-maroon: #6b2737;
+  --color-orange: #e58a3c;       /* accents, highlights */
+  --color-orange-deep: #9d4e0f;  /* AA (4.5:1) orange text on cream */
+  --color-moss: #4f9d5d;         /* check badges, success */
+  --color-moss-deep: #357247;    /* AA (4.5:1) moss text on cream */
+  --color-blush: #f3d9c4;        /* subtle fills */
+  --color-note: #fdf0a6;         /* sticky-note yellow, decorative fills only */
+  --color-note-edge: #e8d98a;    /* note border/shadow line */
+  --color-marker: #b3402c;       /* marker-red connector lines */
+
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+}
+
+html {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-teal);
+  outline-offset: 2px;
+}
+
+/* Diagonal-cut motif inherited from the PBL reference site */
+.diag-cut {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.5rem), 0 100%);
+}
+
+/* Print: the S7 summary is the take-to-session artifact */
+@media print {
+  nav, .no-print { display: none !important; }
+  html, body { background: white !important; }
+  .print-summary { border: 1px solid #ccc; padding: 1.5rem; }
+}
+
+/* S7 refinement (Task 11): keep the printed summary flat, single-column,
+   and fully drawn (no half-finished stroke animation on paper). */
+@media print {
+  .print-summary { border-radius: 0; box-shadow: none; }
+  .done-draw-circle,
+  .done-draw-check { animation: none !important; stroke-dashoffset: 0 !important; }
+}
+
+/* Story: a faint laid-paper grain, drawn with gradients so no image ships. */
+.story-paper {
+  background-color: var(--color-cream);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(35, 36, 43, 0.022) 0 1px,
+      transparent 1px 4px
+    ),
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.55), transparent 45%);
+}
+
+/* Sticky notes sit slightly askew; honour reduced motion by removing the tilt
+   transition only (the tilt itself is static, not motion). */
+.story-note {
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+}
+.story-note:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(35, 36, 43, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-note {
+    transition: none;
+  }
+}
