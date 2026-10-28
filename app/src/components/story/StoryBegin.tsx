@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { Play } from "lucide-react";
+import { assetUrl } from "../../data/asset";
 
 /** Begin gate: the user gesture browsers require before narration may play,
  *  plus the expectations and the resume fork.
@@ -40,7 +41,7 @@ export default function StoryBegin({
     <div className="mx-auto max-w-2xl py-10 text-center">
       <video
         ref={video}
-        src="/story/opening.mp4"
+        src={assetUrl("/story/opening.mp4")}
         autoPlay={!reduced}
         loop
         playsInline
